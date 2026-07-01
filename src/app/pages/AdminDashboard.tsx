@@ -63,7 +63,7 @@ export default function AdminDashboard() {
   const [convenios, setConvenios] = useState<Convenio[]>(initialConvenios);
   const [busqueda, setBusqueda] = useState('');
   
-  // States for new/edit agreement dialog
+  // Estados para el diálogo de creación y edición de convenios
   const [isOpen, setIsOpen] = useState(false);
   const [editingConvenio, setEditingConvenio] = useState<Convenio | null>(null);
   const [nombre, setNombre] = useState('');
@@ -82,7 +82,7 @@ export default function AdminDashboard() {
     return initialStatus;
   });
 
-  // State for segmented notifications
+  // Estado para la segmentación de notificaciones
   const [notifMensaje, setNotifMensaje] = useState('');
   const [notifFiltroCat, setNotifFiltroCat] = useState('Todos');
   const [notifFiltroUbic, setNotifFiltroUbic] = useState('Todos');
@@ -105,7 +105,7 @@ export default function AdminDashboard() {
     }
   ]);
 
-  // Logs state for traceability
+  // Estado de logs para auditoría y trazabilidad de acciones
   const [logs, setLogs] = useState([
     { id: 1, fecha: '2026-06-30 19:12', usuario: 'María González', accion: 'Redención de 100 puntos en Restaurante El Buen Sabor', modulo: 'Puntos' },
     { id: 2, fecha: '2026-06-30 18:05', usuario: 'Admin', accion: 'Activación de convenio Fashion Store Premium', modulo: 'Convenios' },
@@ -114,7 +114,7 @@ export default function AdminDashboard() {
     { id: 5, fecha: '2026-06-29 11:20', usuario: 'María González', accion: 'Redención de 150 puntos en GymFit Center', modulo: 'Puntos' },
   ]);
 
-  // Report mock data
+  // Datos simulados para los reportes gráficos
   const dataUsoConvenios = [
     { name: 'El Buen Sabor', usos: 420 },
     { name: 'Fashion Store', usos: 340 },
@@ -173,7 +173,7 @@ export default function AdminDashboard() {
   const handleSaveConvenio = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingConvenio) {
-      // Edit mode
+      // Modo Edición (Actualización de convenio existente)
       setConvenios((prev) =>
         prev.map((c) =>
           c.id === editingConvenio.id
@@ -194,7 +194,7 @@ export default function AdminDashboard() {
       addLog(`Edición de convenio "${nombre}"`, 'Convenios');
       toast.success('Convenio actualizado correctamente.');
     } else {
-      // Add mode
+      // Modo Adición (Inserción de nuevo convenio)
       const nuevoConvenio: Convenio = {
         id: Date.now().toString(),
         nombre,
