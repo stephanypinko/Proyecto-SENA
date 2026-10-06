@@ -34,14 +34,19 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1 text-center">
+          <div className="flex justify-center mb-2">
+            <span className="text-xs bg-indigo-50 text-indigo-700 font-semibold px-3 py-1 rounded-full border border-indigo-200">
+              🎓 Proyecto Formativo SENA &bull; Prototipo
+            </span>
+          </div>
           <div className="flex justify-center mb-4">
             <div className="bg-indigo-600 p-3 rounded-full">
               <Gift className="h-8 w-8 text-white" />
             </div>
           </div>
-          <CardTitle className="text-2xl">Convenios Empresariales</CardTitle>
+          <CardTitle className="text-2xl">Portal de Convenios</CardTitle>
           <CardDescription>
-            Ingresa a tu cuenta para acceder a todos tus beneficios
+            Acceso demostrativo para afiliados y evaluadores
           </CardDescription>
         </CardHeader>
         <CardContent>

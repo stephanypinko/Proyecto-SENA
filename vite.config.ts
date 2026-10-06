@@ -11,11 +11,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
     {
-      name: 'app-route-redirect',
+      name: 'portal-route-redirect',
       configureServer(server) {
         server.middlewares.use((req, res, next) => {
-          if (req.url === '/app' || req.url === '/app/') {
-            req.url = '/app.html';
+          if (req.url === '/portal' || req.url === '/portal/') {
+            req.url = '/portal.html';
           }
           next();
         });
@@ -32,7 +32,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
-        app: path.resolve(__dirname, 'app.html'),
+        portal: path.resolve(__dirname, 'portal.html'),
         home: path.resolve(__dirname, 'home.html'),
       },
     },

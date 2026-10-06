@@ -3,12 +3,14 @@
   "rewrites": [
     { "source": "/home", "destination": "/index.html" },
     { "source": "/landing", "destination": "/index.html" },
-    { "source": "/app", "destination": "/app.html" },
-    { "source": "/app/:path*", "destination": "/app.html" },
-    { "source": "/login", "destination": "/app.html" },
-    { "source": "/convenios", "destination": "/app.html" },
-    { "source": "/carnet", "destination": "/app.html" },
-    { "source": "/puntos", "destination": "/app.html" },
-    { "source": "/admin", "destination": "/app.html" }
+    { "source": "/portal", "destination": "/portal.html" },
+    { "source": "/portal/:path*", "destination": "/portal.html" },
+    { "source": "/app", "destination": "/portal.html" },
+    { "source": "/app/:path*", "destination": "/portal.html" },
+    { "source": "/login", "destination": "/portal.html" },
+    { "source": "/convenios", "destination": "/portal.html" },
+    { "source": "/carnet", "destination": "/portal.html" },
+    { "source": "/puntos", "destination": "/portal.html" },
+    { "source": "/admin", "destination": "/portal.html" }
   ]
 }

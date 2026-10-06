@@ -1253,7 +1253,7 @@
   <!-- Top Announcement Ticker -->
   <div class="top-announcement">
     <span>✨ <strong>Nuevo Portal 2026:</strong> Convenios activos para asociados y afiliados.</span>
-    <a href="/app">Entrar a la App Web &rarr;</a>
+    <a href="/portal">Entrar a la App Web &rarr;</a>
   </div>
 
   <!-- Header / Navigation Bar -->
@@ -1278,7 +1278,7 @@
         <button class="btn-nav-outline" onclick="abrirModalInstalar()">
           📲 Instalar PWA
         </button>
-        <a href="/app" class="btn-nav-launch">
+        <a href="/portal" class="btn-nav-launch">
           <span>🚀 Abrir App Web</span>
         </a>
       </div>
@@ -1304,7 +1304,7 @@
         <div class="cta-group">
           <div class="cta-buttons">
             <!-- BOTÓN DESTACADO: ABRIR FRONTEND DE LA APP WEB -->
-            <a href="/app" class="btn-primary-launch" id="btnOpenWebApp" title="Ir a la aplicación web">
+            <a href="/portal" class="btn-primary-launch" id="btnOpenWebApp" title="Ir a la aplicación web">
               <span>🚀 ABRIR APP WEB AHORA</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1397,7 +1397,7 @@
               </div>
             </div>
 
-            <a href="/app" class="app-launch-btn-mini">
+            <a href="/portal" class="app-launch-btn-mini">
               🚀 Ver todos los convenios en la App &rarr;
             </a>
           </div>
@@ -1500,7 +1500,7 @@
         </p>
 
         <div class="cta-buttons">
-          <a href="/app" class="btn-primary-launch" style="background: linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%);">
+          <a href="/portal" class="btn-primary-launch" style="background: linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%);">
             <span>🚀 ENTRAR A LA APP WEB</span>
           </a>
         </div>
@@ -1509,7 +1509,7 @@
       <div class="qr-card-container">
         <div class="qr-card-img">
           <!-- QR Code generado dinámicamente -->
-          <img id="qrAppImg" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://convenios.sena.edu.co/app" alt="QR App Web" />
+          <img id="qrAppImg" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://convenios.sena.edu.co/portal" alt="QR App Web" />
         </div>
         <div class="qr-url-badge" id="qrUrlBadge">Acceso Directo a la App</div>
         <p style="font-size: 12px; color: #94A3B8;">Escanea con tu cámara o haz clic en el botón superior</p>
@@ -1594,7 +1594,7 @@
         <p>Accede de forma directa a la aplicación web o descárgala en tu pantalla principal.</p>
       </div>
       <div class="banner-actions">
-        <a href="/app" class="btn-primary-launch" style="text-align: center;">
+        <a href="/portal" class="btn-primary-launch" style="text-align: center;">
           🚀 ABRIR APP WEB
         </a>
         <button class="btn-secondary-install" style="background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);" onclick="abrirModalInstalar()">
@@ -1611,7 +1611,7 @@
         <strong>ClubConvenios &bull; COOPERATIVA SAS</strong> &mdash; Convenios SENA &copy; 2026. Todos los derechos reservados.
       </div>
       <ul class="footer-links">
-        <li><a href="/app">App Web</a></li>
+        <li><a href="/portal">App Web</a></li>
         <li><a href="#beneficios">Beneficios</a></li>
         <li><a href="#como-instalar">Instalación</a></li>
         <li><a href="#faq">Ayuda</a></li>
@@ -1635,7 +1635,7 @@
       </div>
 
       <div style="display: flex; gap: 10px;">
-        <a href="/app" class="btn-primary-launch" style="flex: 1; padding: 14px 18px; font-size: 15px;">
+        <a href="/portal" class="btn-primary-launch" style="flex: 1; padding: 14px 18px; font-size: 15px;">
           🚀 Ir a la App Web
         </a>
       </div>
@@ -1710,7 +1710,7 @@
       try {
         const qrAppImg = document.getElementById('qrAppImg');
         const qrUrlBadge = document.getElementById('qrUrlBadge');
-        const appUrl = window.location.origin + '/app';
+        const appUrl = window.location.origin + '/portal';
         if (qrAppImg) {
           qrAppImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(appUrl);
         }

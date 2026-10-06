@@ -12,6 +12,10 @@ export const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: '/portal',
+    element: <Login />,
+  },
+  {
     path: '/app',
     element: <Login />,
   },
@@ -42,6 +46,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <Navigate to="/app" replace />,
+    element: <Navigate to="/portal" replace />,
   },
 ]);
