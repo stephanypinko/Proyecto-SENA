@@ -12,6 +12,14 @@ export const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: '/app',
+    element: <Login />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
     element: <Layout />,
     children: [
       {
@@ -34,6 +42,6 @@ export const router = createBrowserRouter([
   },
   {
     path: '*',
-    element: <Navigate to="/" replace />,
+    element: <Navigate to="/app" replace />,
   },
 ]);

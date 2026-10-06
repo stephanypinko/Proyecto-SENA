@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/home.html" },
+    { "source": "/landing", "destination": "/home.html" },
+    { "source": "/landing/", "destination": "/home.html" },
+    { "source": "/home.html", "destination": "/home.html" },
+    { "source": "/app", "destination": "/index.html" },
+    { "source": "/app/:path*", "destination": "/index.html" },
+    { "source": "/login", "destination": "/index.html" },
+    { "source": "/convenios", "destination": "/index.html" },
+    { "source": "/carnet", "destination": "/index.html" },
+    { "source": "/puntos", "destination": "/index.html" },
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/((?!assets|.*\\..*).*)", "destination": "/index.html" }
+  ]
+}

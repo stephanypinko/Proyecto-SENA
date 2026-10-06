@@ -80,6 +80,11 @@ export default function Login() {
             <p className="text-sm text-center text-gray-500">
               Demo: Usa cualquier correo (o <strong>admin@cooperativa.com</strong> para Administrador) y contraseña de 4+ caracteres.
             </p>
+            <div className="text-center pt-2 border-t border-gray-100">
+              <a href="/landing" className="text-xs text-indigo-600 hover:text-indigo-800 font-semibold inline-flex items-center gap-1 transition-colors">
+                ← Volver al portal informativo (Landing)
+              </a>
+            </div>
           </form>
         </CardContent>
       </Card>

@@ -1,5 +1,10 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Inicialización de la aplicación Express
 const app = express();
@@ -10,6 +15,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 // Permite procesar cuerpos de solicitudes en formato JSON
 app.use(express.json());
+
+// Servir la Landing Page (home.html) en las rutas principales
+app.get(['/', '/landing', '/home.html'], (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'home.html'));
+});
 
 // Base de datos de usuarios en memoria simulada (Mock DB)
 // Contiene un usuario inicial para pruebas

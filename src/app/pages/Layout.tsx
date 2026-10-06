@@ -9,11 +9,11 @@ export default function Layout() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/app');
   };
 
   if (!user) {
-    navigate('/');
+    navigate('/app');
     return null;
   }
 
