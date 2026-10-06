@@ -1,15 +1,1726 @@
-
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Diseño de app de convenios</title>
-    </head>
-
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClubConvenios | Descuentos, Alianzas y Beneficios Exclusivos</title>
   
+  <!-- Tipografía moderna Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-dark: #3730A3;
+      --primary-light: #818CF8;
+      --accent: #06B6D4;
+      --accent-glow: rgba(6, 182, 212, 0.4);
+      --emerald: #10B981;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
+      --dark: #0B0F19;
+      --dark-card: #131B2E;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --bg-light: #F8FAFC;
+      --bg-alt: #F1F5F9;
+      --white: #FFFFFF;
+      --border-color: #E2E8F0;
+      --gradient-brand: linear-gradient(135deg, #4F46E5 0%, #2563EB 50%, #06B6D4 100%);
+      --gradient-emerald: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      --gradient-dark: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 10px 30px -5px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 45px -10px rgba(15, 23, 42, 0.15);
+      --shadow-glow: 0 12px 30px rgba(79, 70, 229, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--white);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, .brand-font {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Top Announcement Bar */
+    .top-announcement {
+      background: var(--gradient-brand);
+      color: var(--white);
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .top-announcement a {
+      color: #FEF08A;
+      text-decoration: underline;
+      margin-left: 6px;
+      font-weight: 700;
+      transition: opacity 0.2s;
+    }
+
+    .top-announcement a:hover {
+      opacity: 0.9;
+    }
+
+    /* Header / Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--dark);
+    }
+
+    .logo-badge {
+      background: var(--gradient-brand);
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 6px 16px var(--accent-glow);
+    }
+
+    .logo-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+
+    .logo-subtitle {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-nav-outline {
+      border: 1.5px solid var(--border-color);
+      color: var(--dark);
+      padding: 9px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .btn-nav-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(79, 70, 229, 0.04);
+    }
+
+    .btn-nav-launch {
+      background: var(--gradient-brand);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+      transition: all 0.25s ease;
+    }
+
+    .btn-nav-launch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.45);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at 85% 15%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
+                  radial-gradient(circle at 15% 30%, rgba(79, 70, 229, 0.1) 0%, transparent 60%),
+                  #ffffff;
+      padding: 70px 24px 100px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79, 70, 229, 0.05) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .hero-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #EEF2FF;
+      color: var(--primary);
+      border: 1px solid #C7D2FE;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .badge-status .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--emerald);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .badge-status .pulse-dot::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 50%;
+      background: var(--emerald);
+      opacity: 0.5;
+      animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes ping {
+      75%, 100% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
+    }
+
+    .hero-content h1 {
+      font-size: 54px;
+      line-height: 1.12;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 .gradient-text {
+      background: var(--gradient-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 34px;
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* Primary CTA Group */
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    /* Botón Principal para Abrir la App Web */
+    .btn-primary-launch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--gradient-brand);
+      color: #ffffff;
+      padding: 18px 34px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.2px;
+      box-shadow: var(--shadow-glow);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary-launch:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 18px 40px rgba(79, 70, 229, 0.45);
+    }
+
+    .btn-primary-launch svg {
+      width: 22px;
+      height: 22px;
+      transition: transform 0.2s;
+    }
+
+    .btn-primary-launch:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* Botón Secundario de Instalación PWA */
+    .btn-secondary-install {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--dark);
+      padding: 17px 28px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      border: 2px solid #E2E8F0;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-secondary-install:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #EEF2FF;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary-install svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .trust-badges {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .trust-item svg {
+      width: 17px;
+      height: 17px;
+      fill: var(--emerald);
+      flex-shrink: 0;
+    }
+
+    /* Mockup Showcase Smartphone */
+    .mockup-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    .phone-mockup {
+      width: 330px;
+      background: #0B0F19;
+      border-radius: 50px;
+      padding: 13px;
+      box-shadow: 0 30px 80px -15px rgba(15, 23, 42, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      transition: transform 0.5s ease;
+    }
+
+    .phone-mockup:hover {
+      transform: translateY(-8px) rotateY(-2deg);
+    }
+
+    .phone-notch {
+      width: 120px;
+      height: 22px;
+      background: #0B0F19;
+      position: absolute;
+      top: 13px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      z-index: 20;
+    }
+
+    .phone-screen {
+      background: #F8FAFC;
+      border-radius: 40px;
+      overflow: hidden;
+      padding: 24px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .phone-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E2E8F0;
+      margin-top: 6px;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--gradient-brand);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .user-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+
+    .user-carnet {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .live-chip {
+      background: #DCFCE7;
+      color: #15803D;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .mockup-card-featured {
+      background: var(--gradient-brand);
+      color: white;
+      padding: 16px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(79, 70, 229, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mockup-card-featured::after {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+    }
+
+    .tag-deal {
+      background: rgba(255, 255, 255, 0.25);
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 800;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .mockup-card-featured h4 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 3px;
+      line-height: 1.2;
+    }
+
+    .mockup-card-featured p {
+      font-size: 11px;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .mockup-stats-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 8px;
+      font-size: 11px;
+    }
+
+    .mockup-points {
+      font-weight: 800;
+      color: #FEF08A;
+    }
+
+    .deals-mini-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .deal-mini-item {
+      background: white;
+      padding: 10px 12px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+      border: 1px solid #EEF2F6;
+    }
+
+    .deal-mini-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: #EEF2FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .deal-mini-info {
+      flex: 1;
+    }
+
+    .deal-mini-info h5 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .deal-mini-info span {
+      font-size: 10px;
+      color: var(--emerald);
+      font-weight: 700;
+    }
+
+    .app-launch-btn-mini {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 9px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      text-decoration: none;
+      display: block;
+      margin-top: 4px;
+      transition: background 0.2s;
+    }
+
+    .app-launch-btn-mini:hover {
+      background: var(--primary);
+    }
+
+    /* Tarjetas Flotantes 3D */
+    .float-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 18px;
+      border-radius: 18px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .float-top {
+      top: 45px;
+      left: -35px;
+      animation-delay: 0s;
+    }
+
+    .float-bottom {
+      bottom: 45px;
+      right: -35px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .float-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #ECFDF5;
+      color: var(--emerald);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .float-text h6 {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .float-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Stats Quick Bar */
+    .stats-bar {
+      background: var(--dark);
+      color: white;
+      padding: 40px 24px;
+      border-radius: 24px;
+      max-width: 1240px;
+      margin: -40px auto 70px;
+      position: relative;
+      z-index: 10;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 38px;
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 4px;
+      background: linear-gradient(135deg, #FFFFFF 0%, #93C5FD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-item p {
+      font-size: 14px;
+      color: #94A3B8;
+      font-weight: 500;
+    }
+
+    /* Section Headers */
+    .section-title {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 50px;
+    }
+
+    .section-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+
+    .section-title p {
+      font-size: 17px;
+      color: var(--text-muted);
+    }
+
+    /* Categories Grid */
+    .categories-section {
+      padding: 40px 24px 90px;
+      background: var(--bg-light);
+    }
+
+    .categories-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .category-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 32px 28px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: #CBD5E1;
+    }
+
+    .cat-icon-wrap {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: #EEF2FF;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .category-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .category-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .cat-badge {
+      align-self: flex-start;
+      background: #F1F5F9;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    /* Direct Access Live Banner */
+    .direct-access-section {
+      padding: 80px 24px;
+      background: var(--white);
+    }
+
+    .direct-access-box {
+      max-width: 1240px;
+      margin: 0 auto;
+      background: radial-gradient(circle at 100% 0%, rgba(6, 182, 212, 0.2) 0%, transparent 40%),
+                  radial-gradient(circle at 0% 100%, rgba(79, 70, 229, 0.25) 0%, transparent 40%),
+                  #0F172A;
+      border-radius: 32px;
+      padding: 60px 50px;
+      color: white;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 50px;
+      align-items: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .direct-access-text h2 {
+      font-size: 38px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    .direct-access-text p {
+      font-size: 17px;
+      color: #CBD5E1;
+      margin-bottom: 30px;
+      line-height: 1.7;
+    }
+
+    .qr-card-container {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .qr-card-img {
+      width: 160px;
+      height: 160px;
+      background: white;
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .qr-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .qr-url-badge {
+      background: rgba(255, 255, 255, 0.12);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #38BDF8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* Steps / How to Install */
+    .steps-section {
+      padding: 90px 24px;
+      background: var(--bg-alt);
+    }
+
+    .steps-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .step-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 36px 30px;
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      font-weight: 900;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      box-shadow: 0 6px 14px rgba(79, 70, 229, 0.3);
+    }
+
+    .step-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .step-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 90px 24px;
+      background: var(--white);
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .faq-question {
+      padding: 20px 24px;
+      background: var(--white);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      background: var(--bg-light);
+    }
+
+    .faq-answer {
+      padding: 0 24px 20px;
+      font-size: 15px;
+      color: var(--text-muted);
+      display: none;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .faq-toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-toggle-icon {
+      transition: transform 0.2s;
+    }
+
+    /* Bottom Conversion Banner */
+    .banner-cta {
+      max-width: 1240px;
+      margin: 40px auto 90px;
+      padding: 0 24px;
+    }
+
+    .banner-cta-inner {
+      background: var(--gradient-dark);
+      border-radius: 32px;
+      padding: 60px 48px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-cta-inner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .banner-cta-text h2 {
+      font-size: 36px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .banner-cta-text p {
+      font-size: 17px;
+      color: #94A3B8;
+      max-width: 540px;
+    }
+
+    .banner-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Modal de Instrucciones */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: white;
+      border-radius: 28px;
+      padding: 36px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #F1F5F9;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal-close:hover {
+      background: #E2E8F0;
+      color: var(--dark);
+    }
+
+    /* Toast Notification */
+    .toast-notice {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--dark);
+      color: white;
+      padding: 14px 22px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 3000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-notice.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 24px;
+      background: var(--white);
+    }
+
+    .footer-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-content p {
+        margin: 0 auto 30px;
+      }
+      .cta-buttons {
+        justify-content: center;
+      }
+      .trust-badges {
+        justify-content: center;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .categories-grid, .steps-grid {
+        grid-template-columns: 1fr;
+      }
+      .direct-access-box {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .direct-access-box .cta-buttons {
+        justify-content: center;
+      }
+      .banner-cta-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .banner-actions {
+        width: 100%;
+      }
+      .nav-links {
+        display: none;
+      }
+      .float-card {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-content h1 {
+        font-size: 38px;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .btn-primary-launch, .btn-secondary-install {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Ticker -->
+  <div class="top-announcement">
+    <span>✨ <strong>Nuevo Portal 2026:</strong> Convenios activos para asociados y afiliados.</span>
+    <a href="/app">Entrar a la App Web &rarr;</a>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <div class="logo-badge">🤝</div>
+        <div class="logo-text-group">
+          <span class="logo-title">ClubConvenios</span>
+          <span class="logo-subtitle">COOPERATIVA SAS &bull; SENA</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#categorias">Categorías</a></li>
+        <li><a href="#como-instalar">Cómo Instalar</a></li>
+        <li><a href="#faq">Preguntas</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-nav-outline" onclick="abrirModalInstalar()">
+          📲 Instalar PWA
+        </button>
+        <a href="/app" class="btn-nav-launch">
+          <span>🚀 Abrir App Web</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="badge-status">
+          <span class="pulse-dot"></span>
+          Red Oficial de Alianzas y Descuentos Exclusivos
+        </div>
+        
+        <h1>Accede a tus <span>convenios preferenciales</span> en cualquier lugar</h1>
+        
+        <p>
+          Aprovecha tarifas corporativas en gastronomía, salud, educación, viajes y bienestar. 
+          Disfruta de la aplicación web instantánea o instálala como aplicación en tu celular sin consumir almacenamiento.
+        </p>
+
+        <div class="cta-group">
+          <div class="cta-buttons">
+            <!-- BOTÓN DESTACADO: ABRIR FRONTEND DE LA APP WEB -->
+            <a href="/app" class="btn-primary-launch" id="btnOpenWebApp" title="Ir a la aplicación web">
+              <span>🚀 ABRIR APP WEB AHORA</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+
+            <!-- BOTÓN SECUNDARIO: INSTALAR PWA -->
+            <button class="btn-secondary-install" id="btnInstallPWA" onclick="gestionarInstalacionPWA()">
+              <svg viewBox="0 0 24 24">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+              </svg>
+              <span>Descargar / Instalar</span>
+            </button>
+          </div>
+
+          <div class="trust-badges">
+            <div class="trust-item">
+              <svg viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+              <span>100% Gratuita para afiliados</span>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+              <span>Sin descargas pesadas de tienda</span>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+              <span>Carnet Digital con QR</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone Mockup Interactive -->
+      <div class="mockup-wrapper">
+        <div class="float-card float-top">
+          <div class="float-icon">🏷️</div>
+          <div class="float-text">
+            <h6>Descuento Aplicado</h6>
+            <p>30% en Tiendas de Moda Aliadas</p>
+          </div>
+        </div>
+
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-top-bar">
+              <div class="user-pill">
+                <div class="user-avatar">MG</div>
+                <div>
+                  <div class="user-name">María González</div>
+                  <div class="user-carnet">CNV-2024-001234</div>
+                </div>
+              </div>
+              <div class="live-chip">● PWA Activa</div>
+            </div>
+
+            <div class="mockup-card-featured">
+              <div class="tag-deal">⭐ Convenio Destacado</div>
+              <h4>Restaurante El Buen Sabor</h4>
+              <p>25% de descuento en todo el menú internacional.</p>
+              <div class="mockup-stats-row">
+                <span>Vigencia: Dic 2026</span>
+                <span class="mockup-points">🪙 100 Puntos</span>
+              </div>
+            </div>
+
+            <div class="deals-mini-list">
+              <div class="deal-mini-item">
+                <div class="deal-mini-icon">🏋️</div>
+                <div class="deal-mini-info">
+                  <h5>GymFit Center</h5>
+                  <span>20% de descuento mensual</span>
+                </div>
+              </div>
+
+              <div class="deal-mini-item">
+                <div class="deal-mini-icon">💆</div>
+                <div class="deal-mini-info">
+                  <h5>Spa & Wellness Center</h5>
+                  <span>35% de descuento en masajes</span>
+                </div>
+              </div>
+
+              <div class="deal-mini-item">
+                <div class="deal-mini-icon">🍿</div>
+                <div class="deal-mini-info">
+                  <h5>CineMax Premium</h5>
+                  <span>Entradas 2x1 en taquilla</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="/app" class="app-launch-btn-mini">
+              🚀 Ver todos los convenios en la App &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div class="float-card float-bottom">
+          <div class="float-icon">⚡</div>
+          <div class="float-text">
+            <h6>Acceso Rápido PWA</h6>
+            <p>Carga instantánea y segura</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Bar -->
+  <section class="stats-bar" id="beneficios">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <h3>+50</h3>
+        <p>Aliados Comerciales</p>
+      </div>
+      <div class="stat-item">
+        <h3>Hasta 40%</h3>
+        <p>Ahorro en Descuentos</p>
+      </div>
+      <div class="stat-item">
+        <h3>100%</h3>
+        <p>Digital sin papeles</p>
+      </div>
+      <div class="stat-item">
+        <h3>0 MB</h3>
+        <p>Espacio ocupado en teléfono</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías de Convenios -->
+  <section class="categories-section" id="categorias">
+    <div class="section-title">
+      <span class="section-tag">Variedad de Beneficios</span>
+      <h2>Explora nuestras categorías exclusivas</h2>
+      <p>Aprovecha los acuerdos empresariales que tenemos preparados para ti y tu familia.</p>
+    </div>
+
+    <div class="categories-grid">
+      <div class="category-card">
+        <div class="cat-icon-wrap">🍽️</div>
+        <h3>Gastronomía & Restaurantes</h3>
+        <p>Descuentos especiales en cadenas de comida, almuerzos ejecutivos, cafeterías y reposterías asociadas.</p>
+        <span class="cat-badge">Hasta 25% OFF</span>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon-wrap">💪</div>
+        <h3>Salud, Deporte & Fitness</h3>
+        <p>Membresías preferenciales en gimnasios, clínicas odontológicas, optometría y laboratorios clínicos.</p>
+        <span class="cat-badge">Tarifa Corporativa</span>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon-wrap">🛍️</div>
+        <h3>Moda & Calzado</h3>
+        <p>Precios especiales en tiendas departamentales, calzado deportivo y accesorios de marca.</p>
+        <span class="cat-badge">Hasta 30% OFF</span>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon-wrap">✈️</div>
+        <h3>Turismo & Hotelería</h3>
+        <p>Tarifas reducidas en hoteles nacionales, paquetes turísticos, agencias de viaje y alquiler de vehículos.</p>
+        <span class="cat-badge">Planes Vacacionales</span>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon-wrap">🎓</div>
+        <h3>Educación & Cursos</h3>
+        <p>Capacitaciones, diplomados e idiomas con becas parciales y convenios interinstitucionales.</p>
+        <span class="cat-badge">Becas Especiales</span>
+      </div>
+
+      <div class="category-card">
+        <div class="cat-icon-wrap">🎬</div>
+        <h3>Entretenimiento & Cine</h3>
+        <p>Pases 2x1 en funciones de cine, parques temáticos y eventos culturales durante todo el año.</p>
+        <span class="cat-badge">Combos y 2x1</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Direct Access / URL Showcase -->
+  <section class="direct-access-section">
+    <div class="direct-access-box">
+      <div class="direct-access-text">
+        <span class="section-tag" style="color: #38BDF8;">ACCESO DIRECTO INMEDIATO</span>
+        <h2>¿Quieres ingresar a la App Web ahora mismo?</h2>
+        <p>
+          Puedes abrir la plataforma desde cualquier navegador web en tu celular o computador, o escanear el acceso directo.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="/app" class="btn-primary-launch" style="background: linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%);">
+            <span>🚀 ENTRAR A LA APP WEB</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="qr-card-container">
+        <div class="qr-card-img">
+          <!-- QR Code generado dinámicamente -->
+          <img id="qrAppImg" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://convenios.sena.edu.co/app" alt="QR App Web" />
+        </div>
+        <div class="qr-url-badge" id="qrUrlBadge">Acceso Directo a la App</div>
+        <p style="font-size: 12px; color: #94A3B8;">Escanea con tu cámara o haz clic en el botón superior</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo Instalar en 3 Pasos -->
+  <section class="steps-section" id="como-instalar">
+    <div class="section-title">
+      <span class="section-tag">Guía Rápida</span>
+      <h2>Cómo instalar la App en tu celular en 3 pasos</h2>
+      <p>La tecnología PWA te permite tener el icono en tu pantalla sin pasar por tiendas pesadas.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Abre la App Web</h3>
+        <p>Haz clic en <strong>"Abrir App Web"</strong> o visita la URL desde Chrome (Android) o Safari (iPhone).</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Toca en "Instalar" o "Compartir"</h3>
+        <p>En Android presiona el menú de 3 puntos y selecciona <em>"Instalar aplicación"</em>. En iPhone presiona <em>"Compartir"</em> y elige <em>"Agregar a inicio"</em>.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>¡Listo para Usar!</h3>
+        <p>Encontrarás el icono de <strong>ClubConvenios</strong> en tu pantalla principal listo para canjear tus descuentos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faq">
+    <div class="section-title">
+      <span class="section-tag">Preguntas Frecuentes</span>
+      <h2>Resolvemos tus dudas</h2>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>¿Cómo inicio sesión en la aplicación?</span>
+          <span class="faq-toggle-icon">▼</span>
+        </div>
+        <div class="faq-answer">
+          Ingresa a la aplicación web mediante el botón <strong>"Abrir App Web"</strong>. Puedes acceder con tu correo registrado y contraseña, o crear una cuenta nueva en la sección de Registro con tu número de carnet.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>¿Tiene algún costo descargar o usar la app?</span>
+          <span class="faq-toggle-icon">▼</span>
+        </div>
+        <div class="faq-answer">
+          No. La plataforma y la descarga de la App Web son 100% gratuitas para todos los asociados y afiliados de la entidad.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>¿Puedo usar la aplicación sin conexión a internet?</span>
+          <span class="faq-toggle-icon">▼</span>
+        </div>
+        <div class="faq-answer">
+          Sí. Al tratarse de una Aplicación Web Progresiva (PWA), guarda en caché tus convenios favoritos y carnet digital para que puedas mostrarlos incluso si no tienes datos móviles.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA Banner -->
+  <section class="banner-cta">
+    <div class="banner-cta-inner">
+      <div class="banner-cta-text">
+        <h2>Comienza a disfrutar tus beneficios hoy</h2>
+        <p>Accede de forma directa a la aplicación web o descárgala en tu pantalla principal.</p>
+      </div>
+      <div class="banner-actions">
+        <a href="/app" class="btn-primary-launch" style="text-align: center;">
+          🚀 ABRIR APP WEB
+        </a>
+        <button class="btn-secondary-install" style="background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);" onclick="abrirModalInstalar()">
+          📲 Guía de Instalación
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <strong>ClubConvenios &bull; COOPERATIVA SAS</strong> &mdash; Convenios SENA &copy; 2026. Todos los derechos reservados.
+      </div>
+      <ul class="footer-links">
+        <li><a href="/app">App Web</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#como-instalar">Instalación</a></li>
+        <li><a href="#faq">Ayuda</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Modal de Guía de Instalación PWA -->
+  <div class="modal-overlay" id="modalInstalar">
+    <div class="modal-box">
+      <button class="modal-close" onclick="cerrarModalInstalar()">&times;</button>
+      <div style="font-size: 36px; margin-bottom: 12px;">📲</div>
+      <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 8px; color: var(--dark);">Instalar ClubConvenios</h3>
+      <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">
+        Para tener la aplicación en tu pantalla de inicio como una App nativa:
+      </p>
+
+      <div style="background: var(--bg-light); border-radius: 16px; padding: 18px; margin-bottom: 20px; text-align: left; font-size: 14px;">
+        <p style="margin-bottom: 10px;"><strong>En Android (Google Chrome):</strong><br>1. Presiona el botón "Abrir App Web".<br>2. Toca los 3 puntos de la esquina superior derecha.<br>3. Selecciona <em>"Instalar aplicación"</em> o <em>"Agregar a la pantalla principal"</em>.</p>
+        <p><strong>En iPhone (Safari):</strong><br>1. Presiona el botón "Abrir App Web".<br>2. Toca el botón <em>Compartir</em> (ícono del cuadrado con flecha).<br>3. Desliza hacia abajo y elige <em>"Agregar a pantalla de inicio"</em>.</p>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <a href="/app" class="btn-primary-launch" style="flex: 1; padding: 14px 18px; font-size: 15px;">
+          🚀 Ir a la App Web
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notificación -->
+  <div class="toast-notice" id="toastNotice">
+    <span>✨ Abriendo la App Web de Convenios...</span>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    let deferredPrompt = null;
+
+    // Escuchar evento PWA nativo si está disponible
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const btnInstall = document.getElementById('btnInstallPWA');
+      if (btnInstall) {
+        btnInstall.style.display = 'inline-flex';
+      }
+    });
+
+    function gestionarInstalacionPWA() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            mostrarToast("¡Gracias por instalar ClubConvenios!");
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        abrirModalInstalar();
+      }
+    }
+
+    function abrirModalInstalar() {
+      document.getElementById('modalInstalar').classList.add('active');
+    }
+
+    function cerrarModalInstalar() {
+      document.getElementById('modalInstalar').classList.remove('active');
+    }
+
+    function toggleFaq(elem) {
+      const parent = elem.parentElement;
+      parent.classList.toggle('active');
+    }
+
+    function mostrarToast(mensaje) {
+      const toast = document.getElementById('toastNotice');
+      if (mensaje) toast.querySelector('span').innerText = mensaje;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    // Cerrar modal con clic afuera
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('modalInstalar');
+      if (e.target === modal) {
+        cerrarModalInstalar();
+      }
+    });
+
+    // Actualizar dinámicamente el código QR y enlace con el dominio actual
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const qrAppImg = document.getElementById('qrAppImg');
+        const qrUrlBadge = document.getElementById('qrUrlBadge');
+        const appUrl = window.location.origin + '/app';
+        if (qrAppImg) {
+          qrAppImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(appUrl);
+        }
+        if (qrUrlBadge) {
+          qrUrlBadge.textContent = appUrl;
+        }
+      } catch (e) {
+        console.warn('QR updater:', e);
+      }
+    });
+  </script>
+</body>
+</html>

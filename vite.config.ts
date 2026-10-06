@@ -11,11 +11,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
     {
-      name: 'landing-route-redirect',
+      name: 'app-route-redirect',
       configureServer(server) {
         server.middlewares.use((req, res, next) => {
-          if (req.url === '/' || req.url === '/landing' || req.url === '/landing/') {
-            req.url = '/home.html';
+          if (req.url === '/app' || req.url === '/app/') {
+            req.url = '/app.html';
           }
           next();
         });
@@ -32,7 +32,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
-        landing: path.resolve(__dirname, 'home.html'),
+        app: path.resolve(__dirname, 'app.html'),
+        home: path.resolve(__dirname, 'home.html'),
       },
     },
   },
